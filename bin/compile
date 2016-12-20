@@ -78,13 +78,13 @@ while IFS='' read -r julia_dep || [[ -n "$julia_dep" ]]; do
         julia -e "Pkg.add(\"${array[0]}\")"
         julia -e "Pkg.pin(\"${array[0]}\",v\"${array[1]}\")"
         julia -e "using ${array[0]}"
-        if [[ "${array[0]} " == "Plotly" ]]
+        if [[ "${array[0]}" == "Plotly" ]]; then
             julia -e "using Blink;Blink.AtomShell.install()"
         fi
     else
         julia -e "Pkg.add(\"$julia_dep\")"
         julia -e "using $julia_dep"
-        if [[ "${array[0]} " == "Plotly" ]]
+        if [[ "${array[0]}" == "Plotly" ]]; then
             julia -e "using Blink;Blink.AtomShell.install()"
         fi
     fi
