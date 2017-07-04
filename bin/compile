@@ -20,24 +20,26 @@ cd ${BUILD_DIR}
 
 echo -n "-----> Installing julia ...."
 
-deps="https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz"
+
+deps="https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz"
 
 for dep in $deps; do
   depb=$(basename $dep)
   echo "        - $depb"
   curl -LO $dep
   tar -xzf $depb
+  mv julia-903644385b julia
   rm $depb
 done
 
 
-set-env PATH '$HOME/.apt/usr/bin:$HOME/julia-3c9d75391c/bin:$PATH'
-set-env LIBRARY_PATH '$HOME/.apt/usr/lib/x86_64-linux-gnu:$HOME/julia-3c9d75391c/lib:$HOME/julia-3c9d75391c/lib/x86_64-linux-gnu:$LIBRARY_PATH'
-set-env LD_LIBRARY_PATH '$HOME/.apt/usr/lib/x86_64-linux-gnu:$HOME/julia-3c9d75391c/lib:$HOME/julia-3c9d75391c/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH'
+set-env PATH '$HOME/.apt/usr/bin:$HOME/julia/bin:$PATH'
+set-env LIBRARY_PATH '$HOME/.apt/usr/lib/x86_64-linux-gnu:$HOME/julia/lib:$HOME/julia/lib/x86_64-linux-gnu:$LIBRARY_PATH'
+set-env LD_LIBRARY_PATH '$HOME/.apt/usr/lib/x86_64-linux-gnu:$HOME/julia/lib:$HOME/julia/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH'
 
-export LIBRARY_PATH=./.apt/usr/lib/x86_64-linux-gnu:./julia-3c9d75391c/lib:./julia-3c9d75391c/lib/x86_64-linux-gnu:$LIBRARY_PATH
-export LD_LIBRARY_PATH=./.apt/usr/lib/x86_64-linux-gnu:./julia-3c9d75391c/lib:./julia-3c9d75391c/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-export PATH=./.apt/usr/bin:./julia-3c9d75391c/bin:$PATH
+export LIBRARY_PATH=./.apt/usr/lib/x86_64-linux-gnu:./julia/lib:./julia/lib/x86_64-linux-gnu:$LIBRARY_PATH
+export LD_LIBRARY_PATH=./.apt/usr/lib/x86_64-linux-gnu:./julia/lib:./julia/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+export PATH=./.apt/usr/bin:./julia/bin:$PATH
 echo $PATH
 echo $LD_LIBRARY_PATH
 echo $(cmake -version)
