@@ -21,14 +21,14 @@ cd ${BUILD_DIR}
 echo -n "-----> Installing julia ...."
 
 
-deps="https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz"
+deps="https://julialang-s3.julialang.org/bin/linux/x64/0.5/julia-0.5.2-linux-x86_64.tar.gz"
 
 for dep in $deps; do
   depb=$(basename $dep)
   echo "        - $depb"
   curl -LO $dep
   tar -xzf $depb
-  mv julia-903644385b julia
+  mv julia-f4c6c9d4bb julia
   rm $depb
 done
 
